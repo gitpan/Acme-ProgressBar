@@ -3,7 +3,7 @@ package Acme::ProgressBar;
 use strict;
 use warnings;
 
-our $VERSION = '1.10';
+our $VERSION = '1.12';
 
 use base qw(Exporter);
 our @EXPORT = qw(progress);
@@ -51,7 +51,7 @@ Acme::ProgressBar -- a simple progress bar for the patient
 
 version 1.10
 
- $Id: ProgressBar.pm,v 1.4 2004/08/23 17:06:17 rjbs Exp $
+ $Id: ProgressBar.pm,v 1.5 2005/04/02 15:46:49 rjbs Exp $
 
 =head1 SYNOPSIS
 
