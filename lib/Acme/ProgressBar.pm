@@ -1,10 +1,9 @@
-
 package Acme::ProgressBar;
 
 use strict;
 use warnings;
 
-our $VERSION = sprintf "%d.%03d", q$Revision: 1.3 $ =~ /(\d+)/g;
+our $VERSION = '1.10';
 
 use base qw(Exporter);
 our @EXPORT = qw(progress);
@@ -12,29 +11,30 @@ our @EXPORT = qw(progress);
 sub progress(&) {
 	my ($code) = @_;
 	local $| = 1;
-	overprint(message(0,10,0));
+	_overprint(_message(0,10,0));
 	my $begun = time;
   $code->();
 	my $total = time - $begun;
 	for (1 .. 9) {
-		overprint(message($_,10,$total));
+		_overprint(_message($_,10,$total));
 		sleep $total;
 	}
-	overprint(message(10,10,$total));
+	_overprint(_message(10,10,$total));
 	print "\n";
 }
 
-sub message {
+sub _message {
 	my ($iteration, $total, $time) = @_;
 	my $message = 'Progress: [' . 
 	  '=' x $iteration .
 		' ' x ($total - $iteration) .
 		'] ';
-	$message .= $time ? ((($total - $iteration) * $time) . 's remaining' . ' ' x 25)
-	                  : '(calculating time remaining)';
+	$message .= $time
+		? ((($total - $iteration) * $time) . 's remaining' . ' ' x 25)
+		: '(calculating time remaining)';
 }
 
-sub overprint {
+sub _overprint {
 	my ($message) = @_;
 	print $message, "\r";
 }
@@ -46,6 +46,12 @@ __END__
 =head1 NAME 
 
 Acme::ProgressBar -- a simple progress bar for the patient
+
+=head1 VERSION
+
+version 1.10
+
+ $Id: ProgressBar.pm,v 1.4 2004/08/23 17:06:17 rjbs Exp $
 
 =head1 SYNOPSIS
 

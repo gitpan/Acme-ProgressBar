@@ -1,3 +1,6 @@
+1.10  2004-08-23 13:05
+	- code cleanup
+	- POD coverage
 1.002	2004-07-04 22:17:58
 	- Happy 4th of July!
 	- fixed a fencepost error: was only counting to 8, instead of 9
