@@ -4,7 +4,7 @@ package Acme::ProgressBar;
 use strict;
 use warnings;
 
-our $VERSION = sprintf "%d.%03d", q$Revision: 1.1.1.1 $ =~ /(\d+)/g;
+our $VERSION = sprintf "%d.%03d", q$Revision: 1.3 $ =~ /(\d+)/g;
 
 use base qw(Exporter);
 our @EXPORT = qw(progress);
@@ -16,7 +16,7 @@ sub progress(&) {
 	my $begun = time;
   $code->();
 	my $total = time - $begun;
-	for (1 .. 8) {
+	for (1 .. 9) {
 		overprint(message($_,10,$total));
 		sleep $total;
 	}
@@ -85,6 +85,9 @@ allow other divisions of time (other than ten)
 =head1 AUTHOR
 
 Ricardo SIGNES E<lt>rjbs@cpan.orgE<gt>
+
+Thanks to Steve Lidie for pointing out a stupid error in 1.001: I couldn't
+count to ten, and he could.
 
 =head1 COPYRIGHT
 
