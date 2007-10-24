@@ -9,13 +9,11 @@ Acme::ProgressBar - a simple progress bar for the patient
 
 =head1 VERSION
 
-version 1.121
-
- $Id: /my/cs/projects/progbar/trunk/lib/Acme/ProgressBar.pm 27917 2006-11-13T15:56:18.082674Z rjbs  $
+version 1.122
 
 =cut
 
-our $VERSION = '1.121';
+our $VERSION = '1.122';
 
 =head1 SYNOPSIS
 
