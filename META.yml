@@ -1,14 +1,22 @@
 --- #YAML:1.0
-name:                Acme-ProgressBar
-version:             1.124
-abstract:            a simple progress bar for the patient
-license:             perl
-generated_by:        ExtUtils::MakeMaker version 6.36_01
-distribution_type:   module
-requires:     
-    Exporter:                      0
-meta-spec:
-    url:     http://module-build.sourceforge.net/META-spec-v1.2.html
-    version: 1.2
+name:               Acme-ProgressBar
+version:            1.125
+abstract:           a simple progress bar for the patient
 author:
     - Ricardo SIGNES <rjbs@cpan.org>
+license:            perl
+distribution_type:  module
+configure_requires:
+    ExtUtils::MakeMaker:  0
+requires:
+    Exporter:  0
+resources:
+    Repository:  http://github.com/rjbs/acme-progressbar
+no_index:
+    directory:
+        - t
+        - inc
+generated_by:       ExtUtils::MakeMaker version 6.48
+meta-spec:
+    url:      http://module-build.sourceforge.net/META-spec-v1.4.html
+    version:  1.4
