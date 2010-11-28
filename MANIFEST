@@ -1,11 +1,11 @@
 Changes
-lib/Acme/ProgressBar.pm
+LICENSE
+MANIFEST
+META.json
+META.yml
 Makefile.PL
 README
-MANIFEST			This list of files
-t/pod.t
-t/pod-coverage.t
+dist.ini
+lib/Acme/ProgressBar.pm
 t/progbar.t
-t/perl-critic.t
-LICENSE
-META.yml                                 Module meta-data (added by MakeMaker)
+t/release-pod-syntax.t

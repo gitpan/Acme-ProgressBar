@@ -1,40 +1,28 @@
-package Acme::ProgressBar;
-
 use strict;
 use warnings;
+package Acme::ProgressBar;
+BEGIN {
+  $Acme::ProgressBar::VERSION = '1.126';
+}
+# ABSTRACT: a simple progress bar for the patient
 
-=head1 NAME 
+use Time::HiRes ();
 
-Acme::ProgressBar - a simple progress bar for the patient
-
-=head1 VERSION
-
-version 1.125
-
-=cut
-
-our $VERSION = '1.125';
-
-=head1 SYNOPSIS
-
- use Acme::ProgressBar;
- progress { do_something_slow };
-
-=cut
 
 use base qw(Exporter);
 our @EXPORT = qw(progress); ## no critic Export
 
+
 sub progress(&) { ## no critic Prototype
 	my ($code) = @_;
 	local $| = 1; ## no critic
-	_overprint(_message(0,10,0));
-	my $begun = time;
+	_overprint(_message(0,10,undef));
+	my $begun = Time::HiRes::time;
   $code->();
-	my $total = time - $begun;
+	my $total = Time::HiRes::time - $begun;
 	for (1 .. 9) {
 		_overprint(_message($_,10,$total));
-		sleep $total;
+		Time::HiRes::sleep($total);
 	}
 	_overprint(_message(10,10,$total));
 	print "\n";
@@ -47,9 +35,13 @@ sub _message {
     .  q{=} x $iteration
     .  q{ } x ($total - $iteration)
     .  '] ';
-	$message .= $time
-		? ((($total - $iteration) * $time) . 's remaining' . q{ } x 25)
-		: '(calculating time remaining)';
+
+	if (defined $time) {
+	  $message .= sprintf '%0.0fs remaining%25s',
+	    (($total - $iteration) * $time), q{ };
+	} else {
+	  $message .= '(calculating time remaining)';
+	}
 }
 
 sub _overprint {
@@ -57,10 +49,24 @@ sub _overprint {
 	print $message, "\r";
 }
 
+
 "48102931829 minutes remaining";
 
 __END__
+=pod
 
+=head1 NAME
+
+Acme::ProgressBar - a simple progress bar for the patient
+
+=head1 VERSION
+
+version 1.126
+
+=head1 SYNOPSIS
+
+ use Acme::ProgressBar;
+ progress { do_something_slow };
 
 =head1 DESCRIPTION
 
@@ -71,7 +77,7 @@ itself.
 
 =head1 FUNCTIONS
 
-=head2 C<< progress >>
+=head2 progress
 
  progress { unlink $_ for <*> };
  progress { while (<>) { $ua->get($_) } };
@@ -84,7 +90,7 @@ code.
 
 =head1 TODO
 
-=over
+=over 4
 
 =item *
 
@@ -94,12 +100,14 @@ allow other divisions of time (other than ten)
 
 =head1 AUTHOR
 
-Ricardo SIGNES E<lt>rjbs@cpan.orgE<gt>
+Ricardo Signes <rjbs@cpan.org>
 
-Thanks to Steve Lidie for pointing out a stupid error in 1.001: I couldn't
-count to ten, and he could.
+=head1 COPYRIGHT AND LICENSE
 
-=head1 COPYRIGHT
+This software is copyright (c) 2010 by Ricardo Signes.
 
-Copyright (C) 2004, Ricardo SIGNES.  Available under the same terms as Perl
-itself.
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
+

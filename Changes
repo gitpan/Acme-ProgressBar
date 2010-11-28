@@ -1,3 +1,8 @@
+Revision history for Acme-ProgressBar
+
+1.126     2010-11-28 08:18:33 America/New_York
+          improve accuracy of timing to subsecond measurements
+
 1.125     2009-01-16
           packaging tweaks
 
