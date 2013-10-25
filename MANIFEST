@@ -7,5 +7,7 @@ Makefile.PL
 README
 dist.ini
 lib/Acme/ProgressBar.pm
+t/000-report-versions-tiny.t
 t/progbar.t
-t/release-pod-syntax.t
+xt/release/changes_has_content.t
+xt/release/pod-syntax.t
